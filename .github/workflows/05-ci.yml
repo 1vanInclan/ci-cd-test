@@ -51,7 +51,7 @@ jobs:
       - name: Build
         run: |
           echo "::group::Test"
-          pnpm built:frontend
+          pnpm build:frontend
 
   ci:
     runs-on: ubuntu-24.04
@@ -115,7 +115,6 @@ jobs:
 
       - name: Smoke test
         run: |
-          echo "::group::Test"
           pnpm build:backend
           pnpm start:backend
           curl -X GET http://localhost:3000/health
