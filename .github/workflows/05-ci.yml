@@ -13,7 +13,7 @@ jobs:
     steps:
       
       - name: Setup pnpm and Node.js
-        uses: ./.github/actions/setup-pnpm-ci-cd
+        uses: ./.github/actions/setup-pnpm-ci-cd.yml
       
       - name: Lint
         run: |
