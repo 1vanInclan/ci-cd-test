@@ -1,7 +1,10 @@
 name: 04 - Events
 
 on:
-  workflow_dispatch:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created]
 
 jobs:
   inspect-event:
@@ -28,7 +31,7 @@ jobs:
       - name: Comentar como autor del repositorio
         if: github.event_name == 'issues' && github.event.action == 'opened'
         env:
-          AUTHOR_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          AUTHOR_TOKEN: ${{ secrets.PAT }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
           if [[ -z "$AUTHOR_TOKEN" ]]; then
