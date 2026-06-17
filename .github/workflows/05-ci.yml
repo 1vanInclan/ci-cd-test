@@ -7,6 +7,51 @@ on:
     branches: [main]
 
 jobs:
+
+  frontend-lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Preparar pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11
+          run_install: false
+
+      - name: Instalar dependencias
+        run: |
+          echo "::group::Instalar dependencias"
+          pnpm install
+      
+      - name: Lint
+        run: |
+          echo "::group::Lint"
+          pnpm lint:frontend
+
+  frontend-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Preparar pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11
+          run_install: false
+
+      - name: Instalar dependencias
+        run: |
+          echo "::group::Instalar dependencias"
+          pnpm install
+      
+      - name: Test
+        run: |
+          echo "::group::Test"
+          pnpm test:frontend
+
   ci:
     runs-on: ubuntu-24.04
     steps:
@@ -31,3 +76,46 @@ jobs:
       - name: Build
         run: pnpm build
       
+  backend-lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Preparar pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11
+          run_install: false
+
+      - name: Instalar dependencias
+        run: |
+          echo "::group::Instalar dependencias"
+          pnpm install
+
+      - name: Lint
+        run: |
+          echo "::group::Lint"
+          pnpm lint:backend
+
+  backend-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Preparar pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11
+          run_install: false
+
+      - name: Instalar dependencias
+        run: |
+          echo "::group::Instalar dependencias"
+          pnpm install
+      
+      - name: Test
+        run: |
+          echo "::group::Test"
+          pnpm test:backend
